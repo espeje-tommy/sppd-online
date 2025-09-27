@@ -1,0 +1,20 @@
+{
+  "name": "SPPD Online Kemnaker by @TOMMY",
+  "short_name": "SPPD Online",
+  "start_url": "/sppd-online/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "https://espeje-tommy.github.io/sppd-online/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://espeje-tommy.github.io/sppd-online/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
