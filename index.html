@@ -40,22 +40,22 @@
         }
         
         /* PERUBAHAN UTAMA DI SINI */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* URL Gambar background baru dari Unsplash */
-            background-image: url('https://images.unsplash.com/photo-1614102013031-e490a80b2a75?q=80&w=2592&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.5; /* Opacity disesuaikan agar tidak terlalu ramai */
-            z-index: -1;
-            transition: opacity var(--transition-speed) ease;
-        }
-        
+		body::before {
+			content: '';
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-image: url('https://sppd.espeje.com/bg-doodle.jpg');
+			background-repeat: repeat;   /* 🔹 ulangi gambar */
+			background-size: auto;       /* 🔹 biarkan ukuran asli */
+			background-position: top left; /* opsional */
+			opacity: 0.5;
+			z-index: -1;
+			transition: opacity var(--transition-speed) ease;
+		}
+
         body.dark-mode::before {
             opacity: 0.1; /* Di mode gelap, gambar dibuat lebih redup */
         }
@@ -188,7 +188,7 @@
 
     <div class="chat-container">
         <header class="chat-header">
-            <img src="https://ugc.production.linktr.ee/c0f5dee1-2dbd-48a8-a473-6c7c857be074_Logo-eSPeJe-2025.png?io=true&size=avatar-v3_0" alt="Avatar" class="avatar">
+			<img src="https://sppd.espeje.com/logo.png" alt="Avatar" class="avatar">
             <span class="username">@TOMMY</span>
             <button id="theme-switcher" title="Ubah Tema">
                 <i class="fas fa-moon"></i>
