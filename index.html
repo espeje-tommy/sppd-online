@@ -41,19 +41,19 @@
         
         /* PERUBAHAN UTAMA DI SINI */
 		body::before {
-			content: '';
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background-image: url('https://sppd.espeje.com/bg-doodle.jpg');
-			background-repeat: repeat;   /* 🔹 ulangi gambar */
-			background-size: auto;       /* 🔹 biarkan ukuran asli */
-			background-position: top left; /* opsional */
-			opacity: 0.5;
-			z-index: -1;
-			transition: opacity var(--transition-speed) ease;
+		    content: '';
+		    position: fixed;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    background-image: url('./bg-whatsapp.jpg');
+		    background-repeat: repeat;     /* supaya pola seamless diulang */
+		    background-size: 300px;        /* sesuaikan ukuran pola, bisa coba 200–400px */
+		    background-position: top left;
+		    opacity: 0.5;                  /* biar tidak terlalu ramai */
+		    z-index: -1;
+		    transition: opacity var(--transition-speed) ease;
 		}
 
         body.dark-mode::before {
