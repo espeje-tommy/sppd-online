@@ -12,7 +12,7 @@
         :root {
             --transition-speed: 0.3s;
             /* Light Theme Colors */
-            --light-page-bg: #E5DDD5; /* Warna latar belakang utama WA */
+            --light-page-bg: #E5DDD5;
             --light-header-bg: rgba(240, 242, 245, 0.75);
             --light-bubble-bg: #FFFFFF;
             --light-text-primary: #111B21;
@@ -39,7 +39,6 @@
             transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
         }
         
-        /* PERUBAHAN UTAMA DI SINI */
         body::before {
             content: '';
             position: fixed;
@@ -47,17 +46,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* URL Gambar background baru dari Unsplash */
             background-image: url('https://images.unsplash.com/photo-1614102013031-e490a80b2a75?q=80&w=2592&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
-            opacity: 0.7; /* Opacity disesuaikan agar tidak terlalu ramai */
+            opacity: 0.7;
             z-index: -1;
             transition: opacity var(--transition-speed) ease;
         }
 
         body.dark-mode::before {
-            opacity: 0.1; /* Di mode gelap, gambar dibuat lebih redup */
+            opacity: 0.1;
         }
 
         .chat-container {
@@ -134,20 +132,20 @@
         }
 
         .chat-bubble.link-bubble {
-            background-color: #DCF8C6; /* Warna gelembung hijau disesuaikan */
+            background-color: #DCF8C6;
             align-self: flex-end;
             text-decoration: none;
             color: var(--light-text-primary);
             font-weight: 500;
             cursor: pointer;
             transition: transform 0.2s ease, background-color var(--transition-speed) ease;
+            -webkit-tap-highlight-color: transparent; /* ⬅️ Hilangkan highlight kotak */
         }
         
         .chat-bubble.link-bubble:hover {
             transform: translateY(-2px);
         }
 
-        /* === DARK MODE STYLES === */
         body.dark-mode {
             background-color: var(--dark-page-bg);
             color: var(--dark-text-primary);
@@ -174,6 +172,7 @@
         body.dark-mode .chat-bubble.link-bubble {
             background-color: #005C4B;
             color: var(--dark-text-primary);
+            -webkit-tap-highlight-color: transparent;
         }
 
         @keyframes bubble-fade-in {
@@ -194,8 +193,7 @@
                 <i class="fas fa-moon"></i>
             </button>
         </header>
-        <div class="chat-body" id="chat-body">
-            </div>
+        <div class="chat-body" id="chat-body"></div>
     </div>
 
 <script>
@@ -213,13 +211,11 @@
                 Silakan pilih link di bawah ini:` 
             },
             { type: 'link', content: 'Buka Aplikasinya di <b><u>sini</u></b>', url: 'https://script.google.com/macros/s/AKfycbxw7_7JF-csDxAwruhVbOhbhtSl9hqE6672CvC7vO-a0rsVnLG6TD-kfW8VlcEFJrbB/exec' },
-        
-            { type: 'link', content: '📌 Catatan Penting', url: 'https://sppd.espeje.com/notice' },  // 🔹 link baru ditambahkan di sini
-        
+            { type: 'link', content: '📌 Catatan Penting', url: 'https://sppd.espeje.com/notice' },
             { type: 'link', content: 'Cara Memberikan Izin', url: 'https://youtube.com/shorts/pEhQY_u9Pp4' },
             { type: 'link', content: 'Contoh Output PDF dari Aplikasi', url: 'https://youtube.com/shorts/1MW3_N4GwyU' },
             { type: 'link', content: 'Tutorial Penggunaan', url: 'https://youtu.be/e0QAQ2iOY0Q' },
-{ type: 'link', content: 'Changelog', url: 'https://sppd.espeje.com/changelog' }
+            { type: 'link', content: 'Changelog', url: 'https://sppd.espeje.com/changelog' }
         ];
 
         function showMessages() {
@@ -231,12 +227,10 @@
                         bubble.href = msg.url;
                         bubble.target = '_blank';
                         bubble.className = 'chat-bubble link-bubble';
+                        bubble.innerHTML = msg.content;
                     } else {
                         bubble = document.createElement('div');
                         bubble.className = 'chat-bubble';
-                        bubble.innerHTML = msg.content; // ganti ke innerHTML biar <br> kebaca
-                    }
-                    if (msg.type === 'link') {
                         bubble.innerHTML = msg.content;
                     }
                     bubble.style.animationDelay = `${index * 0.2}s`;
