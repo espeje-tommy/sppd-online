@@ -237,7 +237,7 @@
                         bubble.innerHTML = msg.content; // ganti ke innerHTML biar <br> kebaca
                     }
                     if (msg.type === 'link') {
-                        bubble.textContent = msg.content;
+                        bubble.innerHTML = msg.content;
                     }
                     bubble.style.animationDelay = `${index * 0.2}s`;
                     chatBody.appendChild(bubble);
