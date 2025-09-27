@@ -1,166 +1,265 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SPPD Online Kemnaker by @TOMMY</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    :root {
-      --transition-speed: 0.3s;
-      --light-page-bg: #E5DDD5;
-      --light-bubble-bg: #FFFFFF;
-      --light-text-primary: #111B21;
-      --light-link-ripple: rgba(0, 92, 75, 0.25); /* hijau tua transparan */
-      --dark-page-bg: #121212;
-      --dark-bubble-bg: #202C33;
-      --dark-text-primary: #EAEFF2;
-      --dark-link-ripple: rgba(220, 248, 198, 0.25); /* hijau muda transparan */
-    }
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background: var(--light-page-bg);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    .chat-container {
-      width: 100%;
-      max-width: 420px;
-      height: calc(100vh - 40px);
-      display: flex;
-      flex-direction: column;
-      background: transparent;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
-    .chat-header {
-      padding: 10px 15px;
-      background: rgba(240,242,245,0.75);
-      backdrop-filter: blur(10px);
-      display: flex;
-      align-items: center;
-    }
-    #theme-switcher { margin-left: auto; background: none; border: none; font-size: 20px; cursor: pointer; }
-    .chat-body { flex-grow: 1; padding: 20px 10px; overflow-y: auto; display: flex; flex-direction: column; }
-    .chat-bubble {
-      max-width: 75%;
-      padding: 10px 15px;
-      border-radius: 18px;
-      margin-bottom: 10px;
-      background: var(--light-bubble-bg);
-      align-self: flex-start;
-      position: relative;
-      overflow: hidden;
-    }
-    .chat-bubble.link-bubble {
-      align-self: flex-end;
-      background: #DCF8C6;
-      font-weight: 500;
-      text-decoration: none;
-      color: var(--light-text-primary);
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-    }
-    /* Ripple effect layer */
-    .chat-bubble.link-bubble::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      transform: scale(0);
-      background: var(--light-link-ripple);
-      width: 100px;
-      height: 100px;
-      pointer-events: none;
-      opacity: 0;
-      top: var(--ripple-y, 50%);
-      left: var(--ripple-x, 50%);
-      transform: translate(-50%, -50%) scale(0);
-    }
-    .chat-bubble.link-bubble.ripple::after {
-      animation: ripple 0.6s linear;
-    }
-    @keyframes ripple {
-      0% { transform: translate(-50%, -50%) scale(0); opacity: 0.4; }
-      100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
-    }
-    /* Dark mode */
-    body.dark-mode { background: var(--dark-page-bg); color: var(--dark-text-primary); }
-    body.dark-mode .chat-bubble { background: var(--dark-bubble-bg); }
-    body.dark-mode .chat-bubble.link-bubble { background: #005C4B; color: var(--dark-text-primary); }
-    body.dark-mode .chat-bubble.link-bubble::after { background: var(--dark-link-ripple); }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPPD Online Kemnaker by @TOMMY</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --transition-speed: 0.3s;
+            /* Light Theme Colors */
+            --light-page-bg: #E5DDD5; /* Warna latar belakang utama WA */
+            --light-header-bg: rgba(240, 242, 245, 0.75);
+            --light-bubble-bg: #FFFFFF;
+            --light-text-primary: #111B21;
+            --light-text-secondary: #667781;
+            /* Dark Theme Colors */
+            --dark-page-bg: #121212;
+            --dark-header-bg: rgba(32, 44, 51, 0.75);
+            --dark-bubble-bg: #202C33;
+            --dark-text-primary: #EAEFF2;
+            --dark-text-secondary: #8696A0;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-page-bg);
+            color: var(--light-text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+            box-sizing: border-box;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+        
+        /* PERUBAHAN UTAMA DI SINI */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* URL Gambar background baru dari Unsplash */
+            background-image: url('https://images.unsplash.com/photo-1614102013031-e490a80b2a75?q=80&w=2592&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.7; /* Opacity disesuaikan agar tidak terlalu ramai */
+            z-index: -1;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        body.dark-mode::before {
+            opacity: 0.1; /* Di mode gelap, gambar dibuat lebih redup */
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 420px;
+            height: calc(100vh - 40px);
+            max-height: 800px;
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: border var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: var(--light-header-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
+            transition: background-color var(--transition-speed) ease, border-bottom var(--transition-speed) ease;
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+
+        .username {
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        
+        #theme-switcher {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: var(--light-text-secondary);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .chat-body {
+            flex-grow: 1;
+            padding: 20px 10px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-bubble {
+            max-width: 75%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            background-color: var(--light-bubble-bg);
+            box-shadow: 0 1px 1px rgba(0,0,0,0.08);
+            align-self: flex-start;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: bubble-fade-in 0.5s forwards;
+        }
+
+        .chat-bubble.link-bubble {
+            background-color: #DCF8C6; /* Warna gelembung hijau disesuaikan */
+            align-self: flex-end;
+            text-decoration: none;
+            color: var(--light-text-primary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color var(--transition-speed) ease;
+        }
+        
+        .chat-bubble.link-bubble:hover {
+            transform: translateY(-2px);
+        }
+
+        /* === DARK MODE STYLES === */
+        body.dark-mode {
+            background-color: var(--dark-page-bg);
+            color: var(--dark-text-primary);
+        }
+        
+        body.dark-mode .chat-container {
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        body.dark-mode .chat-header {
+            background-color: var(--dark-header-bg);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        body.dark-mode #theme-switcher {
+            color: var(--dark-text-secondary);
+        }
+        
+        body.dark-mode .chat-bubble {
+            background-color: var(--dark-bubble-bg);
+        }
+
+        body.dark-mode .chat-bubble.link-bubble {
+            background-color: #005C4B;
+            color: var(--dark-text-primary);
+        }
+
+        @keyframes bubble-fade-in {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="chat-container">
-    <header class="chat-header">
-      <span>@TOMMY</span>
-      <button id="theme-switcher"><i class="fas fa-moon"></i></button>
-    </header>
-    <div class="chat-body" id="chat-body"></div>
-  </div>
+
+    <div class="chat-container">
+        <header class="chat-header">
+			<img src="https://sppd.espeje.com/logo.png" alt="Avatar" class="avatar">
+            <span class="username">@TOMMY</span>
+            <button id="theme-switcher" title="Ubah Tema">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+        <div class="chat-body" id="chat-body">
+            </div>
+    </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const body = document.body;
-    const themeSwitcher = document.getElementById("theme-switcher");
-    const icon = themeSwitcher.querySelector("i");
-    const chatBody = document.getElementById("chat-body");
+    document.addEventListener('DOMContentLoaded', () => {
+        const themeSwitcher = document.getElementById('theme-switcher');
+        const body = document.body;
+        const icon = themeSwitcher.querySelector('i');
+        const chatBody = document.getElementById('chat-body');
 
-    const chatMessages = [
-      { type: "text", content: "Halo! Selamat datang di <b>SMART SPD ONLINE</b>.<br>Silakan pilih link:" },
-      { type: "link", content: 'Buka Aplikasinya di <b><u>sini</u></b>', url: "https://script.google.com/macros/s/AKfycbxw7_7JF-csDxAwruhVbOhbhtSl9hqE6672CvC7vO-a0rsVnLG6TD-kfW8VlcEFJrbB/exec" },
-      { type: "link", content: "📌 Catatan Penting", url: "https://sppd.espeje.com/notice" }
-    ];
+        const chatMessages = [
+            { 
+                type: 'text', 
+                content: `Halo! Selamat datang di <b>SMART SPD ONLINE</b>. Di sini kamu bisa bikin Administrasi Perjalanan Dinas secara online, <u>cukup dari handphone kamu.</u> <b>Lihat CATATAN PENTING yaaa</b>.<br><br>
+                <b>"Kemudahan Proses Administratif untuk Pekerjaan Substansial yang Lebih Produktif"</b><br><br>
+                Silakan pilih link di bawah ini:` 
+            },
+            { type: 'link', content: 'Buka Aplikasinya di <b><u>sini</u></b>', url: 'https://script.google.com/macros/s/AKfycbxw7_7JF-csDxAwruhVbOhbhtSl9hqE6672CvC7vO-a0rsVnLG6TD-kfW8VlcEFJrbB/exec' },
+        
+            { type: 'link', content: '📌 Catatan Penting', url: 'https://sppd.espeje.com/notice' },  // 🔹 link baru ditambahkan di sini
+        
+            { type: 'link', content: 'Cara Memberikan Izin', url: 'https://youtube.com/shorts/pEhQY_u9Pp4' },
+            { type: 'link', content: 'Contoh Output PDF dari Aplikasi', url: 'https://youtube.com/shorts/1MW3_N4GwyU' },
+            { type: 'link', content: 'Tutorial Penggunaan', url: 'https://youtu.be/e0QAQ2iOY0Q' },
+{ type: 'link', content: 'Changelog', url: 'https://sppd.espeje.com/changelog' }
+        ];
 
-    function showMessages() {
-      chatMessages.forEach((msg, index) => {
-        setTimeout(() => {
-          let bubble;
-          if (msg.type === "link") {
-            bubble = document.createElement("a");
-            bubble.href = msg.url;
-            bubble.target = "_blank";
-            bubble.className = "chat-bubble link-bubble";
-            bubble.innerHTML = msg.content;
-
-            // Ripple effect listener
-            bubble.addEventListener("click", function(e) {
-              const rect = bubble.getBoundingClientRect();
-              const x = e.clientX - rect.left;
-              const y = e.clientY - rect.top;
-              bubble.style.setProperty("--ripple-x", x + "px");
-              bubble.style.setProperty("--ripple-y", y + "px");
-              bubble.classList.remove("ripple");
-              void bubble.offsetWidth; // restart animation
-              bubble.classList.add("ripple");
+        function showMessages() {
+            chatMessages.forEach((msg, index) => {
+                setTimeout(() => {
+                    let bubble;
+                    if (msg.type === 'link') {
+                        bubble = document.createElement('a');
+                        bubble.href = msg.url;
+                        bubble.target = '_blank';
+                        bubble.className = 'chat-bubble link-bubble';
+                    } else {
+                        bubble = document.createElement('div');
+                        bubble.className = 'chat-bubble';
+                        bubble.innerHTML = msg.content; // ganti ke innerHTML biar <br> kebaca
+                    }
+                    if (msg.type === 'link') {
+                        bubble.innerHTML = msg.content;
+                    }
+                    bubble.style.animationDelay = `${index * 0.2}s`;
+                    chatBody.appendChild(bubble);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                }, index * 400);
             });
+        }
 
-          } else {
-            bubble = document.createElement("div");
-            bubble.className = "chat-bubble";
-            bubble.innerHTML = msg.content;
-          }
-          chatBody.appendChild(bubble);
-          chatBody.scrollTop = chatBody.scrollHeight;
-        }, index * 400);
-      });
-    }
-
-    themeSwitcher.addEventListener("click", () => {
-      body.classList.toggle("dark-mode");
-      if (body.classList.contains("dark-mode")) {
-        icon.classList.replace("fa-moon","fa-sun");
-      } else {
-        icon.classList.replace("fa-sun","fa-moon");
-      }
+        themeSwitcher.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+        
+        showMessages();
     });
-
-    showMessages();
-  });
 </script>
+
 </body>
 </html>
