@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Changelog Online Smart SPD 2025</title>
+    <title>Changelog Online Smart SPD 2026</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* CSS untuk tampilan terminal retro */
         body {
             background-color: #000000;
-            color: #33FF33; /* Warna hijau limau */
+            color: #33FF33;
             font-family: 'IBM Plex Mono', monospace;
             font-size: 15px;
             line-height: 1.6;
@@ -26,7 +25,6 @@
             margin: 0 auto;
         }
 
-        /* Style untuk judul pengganti ASCII Art */
         .header-title {
             text-align: center;
             font-size: 1.5em;
@@ -38,7 +36,7 @@
 
         h1, h2 {
             font-weight: 700;
-            color: #90ee90; /* Hijau lebih terang untuk judul */
+            color: #90ee90;
             text-shadow: 0 0 5px #33FF33;
         }
 
@@ -60,11 +58,10 @@
         }
 
         li::before {
-            content: "> "; /* Meniru prompt atau bullet point terminal */
+            content: "> ";
             margin-right: 10px;
         }
         
-        /* Sub-list untuk detail lebih dalam */
         ul ul {
             padding-left: 20px;
             margin-top: 8px;
@@ -75,7 +72,6 @@
             content: "- ";
         }
 
-        /* Style untuk link navigasi (Home) */
         .nav-link {
             color: #90ee90;
             text-decoration: none;
@@ -91,7 +87,6 @@
             margin-bottom: 20px;
         }
 
-        /* Animasi untuk kursor berkedip */
         .cursor {
             display: inline-block;
             background-color: #33FF33;
@@ -105,7 +100,6 @@
             from, to { background-color: transparent; }
             50% { background-color: #33FF33; }
         }
-
     </style>
 </head>
 <body>
@@ -120,9 +114,16 @@
             <p>SMART SPD by @TOMMY</p>
         </div>
 
-        <h1>C:\> LOAD "Online Smart SPD 2025\version_history.log" <span class="cursor"></span></h1>
+        <h1>C:\> LOAD "Online Smart SPD 2026\version_history.log" <span class="cursor"></span></h1>
 
         <section id="version-history">
+
+            <h2>[ Versi 2.1 ] - Penyesuaian Tahun Anggaran 2026 - 07 Jan 2026</h2>
+            <ul>
+                <li>Penyesuaian seluruh perhitungan biaya perjalanan dinas sesuai Standar Biaya Masukan (SBM) Tahun Anggaran 2026.</li>
+                <li>Pembaruan referensi satuan biaya untuk memastikan kepatuhan terhadap regulasi terbaru.</li>
+                <li>Penyesuaian validasi data agar selaras dengan ketentuan Tahun Anggaran 2026.</li>
+            </ul>
 
             <h2>[ Versi 2.0 ] - Integrasi Lampiran - 26 Sep 2025</h2>
             <ul>
@@ -135,14 +136,14 @@
             <h2>[ Versi 1.4 ] - Migrasi Domain - 25 Sep 2025</h2>
             <ul>
                 <li>Migrasi ke Sub-Domain baru.</li>
-<li>Pembuatan halaman changelog.</li>
+                <li>Pembuatan halaman changelog.</li>
             </ul>
             
             <h2>[ Versi 1.3 ] - Peningkatan Stabilitas - 20 Sep 2025</h2>
             <ul>
                 <li>Perbaikan logika penanganan error saat ekspor PDF.</li>
                 <li>Optimasi penulisan data ke Sheet untuk mengurangi waktu tunggu.</li>
-                <li>Penambahan fitur "Muat Data Sesi Terakhir" untuk melanjutkan pekerjaan yang tertunda atau sesi terakhir user.</li>
+                <li>Penambahan fitur "Muat Data Sesi Terakhir".</li>
             </ul>
 
             <h2>[ Versi 1.2 ] - Fitur Pengiriman Email - 18 Sep 2025</h2>
@@ -152,38 +153,21 @@
 
             <h2>[ Versi 1.1 ] - Peningkatan Antarmuka & UX - 17 Sep 2025</h2>
             <ul>
-                <li>Implementasi antarmuka yang dinamis di sisi pengguna (frontend).
-                    <ul>
-                        <li>Fungsi untuk menambah dan menghapus form pegawai secara real-time.</li>
-                        <li>Fungsi untuk memuat data dari sesi sebelumnya agar tidak perlu input ulang.</li>
-                        <li>Pembuatan model tabulasi untuk Data Umum dan Data Pegawai.</li>
-                    </ul>
-                </li>
-                <li>Penambahan Tabel Ringkasan untuk menampilkan data pegawai yang aktif pada sesi yang sedang berjalan.</li>
-                <li>Pengembangan sistem notifikasi dan konfirmasi (pop-up) untuk interaksi pengguna.</li>
+                <li>Antarmuka dinamis frontend dan manajemen data sesi.</li>
+                <li>Penambahan tabel ringkasan pegawai aktif.</li>
+                <li>Sistem notifikasi dan konfirmasi interaktif.</li>
             </ul>
 
-            <h2>[ Versi 1.0 ] - Rilis Awal & Fungsionalitas Inti - 15 Sep 2025</h2>
+            <h2>[ Versi 1.0 ] - Rilis Awal - 15 Sep 2025</h2>
             <ul>
-                <li>Rilis awal aplikasi web Online Smart SPD 2025.</li>
-                <li>Struktur dasar aplikasi:
-                    <ul>
-                        <li>Frontend: Halaman HTML yang Mobile Friendly.</li>
-                        <li>Backend: Menggunakan Google Apps Script.</li>
-                    </ul>
-                </li>
-                <li>Fungsionalitas inti:
-                    <ul>
-                        <li>Penerimaan dan perekaman data input dari formulir web.</li>
-                        <li>Penyimpanan data log historis ke dalam sheet.</li>
-                        <li>Ujicoba pembuatan PDF otomatis dari sheet.</li>
-                    </ul>
-                </li>
+                <li>Rilis awal Online Smart SPD.</li>
+                <li>Frontend HTML Mobile Friendly & Backend Google Apps Script.</li>
+                <li>Ujicoba pembuatan PDF otomatis.</li>
             </ul>
 
         </section>
 
-        <p style="margin-top: 40px;">C:\Online Smart SPD 2025\> <span class="cursor"></span></p>
+        <p style="margin-top: 40px;">C:\Online Smart SPD 2026\> <span class="cursor"></span></p>
         
         <div class="nav-container" style="margin-top: 40px;">
             <a href="http://sppd.espeje.com/" class="nav-link">(Home)</a>
