@@ -6,23 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPPD Online Kemnaker by @TOMMY</title>
 
-    <!-- Favicon untuk browser desktop -->
     <link rel="icon" href="https://espeje-tommy.github.io/sppd-online/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="32x32" href="https://espeje-tommy.github.io/sppd-online/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://espeje-tommy.github.io/sppd-online/favicon-16x16.png">
-
-    <!-- Apple Touch Icon (iOS) -->
     <link rel="apple-touch-icon" sizes="180x180" href="https://espeje-tommy.github.io/sppd-online/apple-touch-icon.png">
 
-    <!-- Nama aplikasi iOS & tampilan full screen -->
     <meta name="apple-mobile-web-app-title" content="SPPD Online">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-
-    <!-- Manifest untuk Android / PWA -->
     <link rel="manifest" href="https://espeje-tommy.github.io/sppd-online/site.webmanifest">
 
-    <!-- Fonts & Styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -31,13 +24,13 @@
 <style>
         :root {
             --transition-speed: 0.3s;
-            /* Light Theme Colors */
-            --light-page-bg: #E5DDD5; /* Warna latar belakang utama WA */
+            /* Light Theme */
+            --light-page-bg: #E5DDD5;
             --light-header-bg: rgba(240, 242, 245, 0.75);
             --light-bubble-bg: #FFFFFF;
             --light-text-primary: #111B21;
             --light-text-secondary: #667781;
-            /* Dark Theme Colors */
+            /* Dark Theme */
             --dark-page-bg: #121212;
             --dark-header-bg: rgba(32, 44, 51, 0.75);
             --dark-bubble-bg: #202C33;
@@ -59,7 +52,6 @@
             transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
         }
         
-        /* PERUBAHAN UTAMA DI SINI */
         body::before {
             content: '';
             position: fixed;
@@ -67,17 +59,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* URL Gambar background baru dari Unsplash */
             background-image: url('https://images.unsplash.com/photo-1614102013031-e490a80b2a75?q=80&w=2592&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
-            opacity: 0.7; /* Opacity disesuaikan agar tidak terlalu ramai */
+            opacity: 0.7;
             z-index: -1;
             transition: opacity var(--transition-speed) ease;
         }
 
         body.dark-mode::before {
-            opacity: 0.1; /* Di mode gelap, gambar dibuat lebih redup */
+            opacity: 0.1;
         }
 
         .chat-container {
@@ -154,7 +145,7 @@
         }
 
         .chat-bubble.link-bubble {
-            background-color: #DCF8C6; /* Warna gelembung hijau disesuaikan */
+            background-color: #DCF8C6;
             align-self: flex-end;
             text-decoration: none;
             color: var(--light-text-primary);
@@ -167,7 +158,57 @@
             transform: translateY(-2px);
         }
 
-        /* === DARK MODE STYLES === */
+        /* === STYLE TOMBOL UTAMA (BLUE GRADIENT) === */
+        .chat-bubble.primary-cta {
+            /* Warna Dasar: Biru Royal ke Ungu */
+            background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%);
+            
+            /* Teks Putih Kontras Tinggi */
+            color: #ffffff !important;
+            font-weight: 800;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4); 
+            max-width: 85%;
+            
+            /* Animasi Awal: Masuk (Fade In) */
+            animation: bubble-fade-in 0.5s forwards;
+            transition: transform 0.2s ease;
+        }
+
+        /* Class untuk Memicu Animasi Heartbeat (Ditambah JS nanti) */
+        .chat-bubble.primary-cta.start-animate {
+            /* PENTING: Paksa opacity 1 agar tombol tidak menghilang saat ganti animasi */
+            opacity: 1 !important; 
+            transform: translateY(0) !important;
+            animation: heartbeat-blue 1.5s infinite ease-in-out;
+        }
+
+        .chat-bubble.primary-cta:hover {
+            transform: scale(1.05) !important; /* Force scale saat hover */
+            background: linear-gradient(135deg, #1D4ED8 0%, #4338CA 100%);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+            animation: none; /* Hentikan animasi saat kursor di atasnya */
+        }
+
+        /* Keyframes Heartbeat (Light Mode) */
+        @keyframes heartbeat-blue {
+            0% {
+                background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%);
+                transform: scale(1);
+            }
+            50% {
+                background: linear-gradient(135deg, #60A5FA 0%, #818CF8 100%); /* Lebih Terang */
+                transform: scale(1.03);
+                box-shadow: 0 0 25px rgba(37, 99, 235, 0.8);
+            }
+            100% {
+                background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%);
+                transform: scale(1);
+            }
+        }
+
+        /* === DARK MODE === */
         body.dark-mode {
             background-color: var(--dark-page-bg);
             color: var(--dark-text-primary);
@@ -196,6 +237,33 @@
             color: var(--dark-text-primary);
         }
 
+        /* Dark Mode Tombol Utama */
+        body.dark-mode .chat-bubble.primary-cta {
+            border: 1px solid rgba(255,255,255,0.3);
+            background: linear-gradient(135deg, #1E40AF 0%, #3730A3 100%);
+        }
+        
+        /* Animasi Dark Mode */
+        body.dark-mode .chat-bubble.primary-cta.start-animate {
+            animation: heartbeat-blue-dark 1.5s infinite ease-in-out;
+        }
+
+        @keyframes heartbeat-blue-dark {
+            0% {
+                background: linear-gradient(135deg, #1E40AF 0%, #3730A3 100%);
+                transform: scale(1);
+            }
+            50% {
+                background: linear-gradient(135deg, #3B82F6 0%, #6366F1 100%);
+                transform: scale(1.03);
+                box-shadow: 0 0 25px rgba(59, 130, 246, 0.6);
+            }
+            100% {
+                background: linear-gradient(135deg, #1E40AF 0%, #3730A3 100%);
+                transform: scale(1);
+            }
+        }
+
         @keyframes bubble-fade-in {
             to {
                 opacity: 1;
@@ -208,8 +276,8 @@
 
     <div class="chat-container">
         <header class="chat-header">
-			<img src="https://sppd.espeje.com/logo.png" alt="Avatar" class="avatar">
-            <span class="username">@TOMMY</span>
+            <img src="https://sppd.espeje.com/logo.png" alt="Avatar" class="avatar">
+            <span class="username">@eSPeJe_Admin</span>
             <button id="theme-switcher" title="Ubah Tema">
                 <i class="fas fa-moon"></i>
             </button>
@@ -229,24 +297,37 @@
             { 
                 type: 'text', 
                 content: `Hello gengs 👋 Thanks udah mampir di <b>SMART SPD ONLINE</b>.<br>
-				Urus SPPD sekarang tinggal klik-klik di HP. Jangan lupa intip <b>Catatan Penting</b> yaaa 😉<br><br>
+                Urus SPPD sekarang tinggal klik-klik di HP. Jangan lupa intip <b>Catatan Penting</b> yaaa 😉<br><br>
                 <b>"Kemudahan Proses Administratif untuk Pekerjaan Substansial yang Lebih Produktif"</b><br><br>
                 Silakan pilih link di bawah ini:` 
             },
-            { type: 'link', content: 'Buka Aplikasi SPPD ONLINE di <b><u>sini</u></b>', url: 'https://script.google.com/macros/s/AKfycbymsgPyKm4mIUZ9SFZM9-431UL2FRtr629Vk0PIkkZhHx5QE0647P-zQ5oo1gQRC86KOA/exec' },
-            { type: 'link', content: '📌 Catatan Penting', url: 'https://sppd.espeje.com/notice' },  // 🔹 link baru ditambahkan di sini
+            
+            // --- TOMBOL UTAMA ---
+            { 
+                type: 'link', 
+                content: '🚀 <b>Buka Aplikasi SPPD ONLINE</b>',
+                url: 'https://script.google.com/macros/s/AKfycbymsgPyKm4mIUZ9SFZM9-431UL2FRtr629Vk0PIkkZhHx5QE0647P-zQ5oo1gQRC86KOA/exec',
+                isPrimary: true 
+            },
+            // --------------------
+            
+            { type: 'link', content: '📌 Catatan Penting', url: 'https://sppd.espeje.com/notice' },
             { type: 'link', content: 'Cara Memberikan Izin', url: 'https://youtube.com/shorts/pEhQY_u9Pp4' },
             { type: 'link', content: 'Contoh Output PDF dari Aplikasi', url: 'https://youtube.com/shorts/1MW3_N4GwyU' },
             { type: 'link', content: 'Tutorial Penggunaan', url: 'https://youtu.be/e0QAQ2iOY0Q' },
-
-			{ 
+            { 
                 type: 'text', 
                 content: `Jangan lupa cek juga aplikasi desktop <b>eSPeJe 2026</b>, untuk pengerjaan pertanggungjawaban <b>SPPD & Honorarium kegiatan <i>fullboard, fullday & halfday</i></b>  👇` 
             },
-			{ type: 'link', content: '<b>Desktop App</b> eSPeJe 2026', url: 'https://spj.espeje.com/' }
+            { type: 'link', content: '<b>Desktop App</b> eSPeJe 2026', url: 'https://spj.espeje.com/' }
         ];
-		
-		function showMessages() {
+        
+        function showMessages() {
+            // Waktu delay antar pesan
+            const messageDelay = 400; 
+            // Total waktu tunggu = (jumlah pesan x delay) + buffer 1 detik
+            const totalAnimationTime = (chatMessages.length * messageDelay) + 1000;
+
             chatMessages.forEach((msg, index) => {
                 setTimeout(() => {
                     let bubble;
@@ -255,19 +336,35 @@
                         bubble.href = msg.url;
                         bubble.target = '_blank';
                         bubble.className = 'chat-bubble link-bubble';
+                        
+                        if (msg.isPrimary) {
+                            bubble.classList.add('primary-cta');
+                            bubble.id = 'primary-button'; // ID untuk JS selector
+                        }
+
                     } else {
                         bubble = document.createElement('div');
                         bubble.className = 'chat-bubble';
-                        bubble.innerHTML = msg.content; // ganti ke innerHTML biar <br> kebaca
+                        bubble.innerHTML = msg.content;
                     }
+                    
                     if (msg.type === 'link') {
                         bubble.innerHTML = msg.content;
                     }
+
                     bubble.style.animationDelay = `${index * 0.2}s`;
                     chatBody.appendChild(bubble);
                     chatBody.scrollTop = chatBody.scrollHeight;
-                }, index * 400);
+                }, index * messageDelay);
             });
+
+            // LOGIKA: Jalankan animasi heartbeat SETELAH semua selesai muncul
+            setTimeout(() => {
+                const primaryBtn = document.getElementById('primary-button');
+                if (primaryBtn) {
+                    primaryBtn.classList.add('start-animate');
+                }
+            }, totalAnimationTime);
         }
 
         themeSwitcher.addEventListener('click', () => {
